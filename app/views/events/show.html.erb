@@ -1,0 +1,63 @@
+<h1>Event</h1>
+
+<p>
+  <strong>Name: </strong>
+  <%= @event.name %>
+</p>
+
+<p>
+  <strong>Commenters: </strong>
+  <%= @event.comments.distinct.pluck(:user_id).size %>
+</p>
+
+<p>
+  <strong>Number of participants: </strong>
+  <span id="opener" style="cursor: pointer; ">
+    <%= @event.users.size %>
+  </span>
+</p>
+
+<p>
+  <strong>Comments: </strong>
+</p>
+<%= render @event.comments %>
+
+<%= form_with model: [ @event, @event.comments.build ] do |form| %>
+  <p> 
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<script>
+$( function() {
+    $( "#dialog" ).dialog({
+      autoOpen: false,
+      show: {
+        effect: "blind",
+        duration: 1000
+      },
+      hide: {
+        effect: "explode",
+        duration: 1000
+      }
+    });
+ 
+    $( "#opener" ).on( "click", function() {
+      $( "#dialog" ).dialog( "open" );
+    });
+  } );
+</script>
+
+<div id="dialog" title="List users">
+  <ul>
+  <% @event.users.each do |user| %>
+    <li>
+      <%= link_to user.name, user, target: "_blank"%>
+    </li>
+  <% end %>
+  </ul>
+</div>
+ 

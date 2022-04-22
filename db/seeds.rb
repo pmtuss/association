@@ -5,22 +5,30 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-ra
-users = User.create([
-    {name: "user01", email: "email01@aaaa.com"},
-    {name: "user02", email: "email02@aaaa.com"}
-])
+User.destroy_all
+Post.destroy_all
 
-users[0].posts.create([
+User.create([
+    {name: "admin", email: "admin@aaaa.com", admin: true},
+    {name: "user01", email: "user01@aaaa.com"},
+    {name: "user02", email: "user02@aaaa.com"},
+    {name: "user03", email: "user03@aaaa.com"},
+    {name: "user04", email: "user04@aaaa.com"}
+])
+user = User.find_by(name: "tai")
+posts = user.posts.create([
     {title: "post 01", body: "this is post 01"},
     {title: "post 02", body: "this is post 02"}
 ])
 
-users[0].create_address(state: "Ha Noi")
-users[0].events.create([
-    {name: "Gio to 10/3"},
-    {name: "Nghi le 30/4 - 1/5"}
+user.create_profile(name: "CHO TAI", nickname: "chua", telephone: "0333333333", address: "Nghe An", dob: DateTime.new(2000, 2, 1))
+user.events.create([
+    {name: "Nghi le 30/4 - 1/5"},
+    {name: "Tham quan .... "}
 ])
 
-card = Card.create(user: User.first)
-bank_info = BankInfo.create(name: "MB bank", card: card)
+posts[0].comments.create(body: "commenttttttttttttttttt", user: user)
+posts[0].comments.create(body: "aaaaaaaaaaaaaaaaaaaaaaa", user: user)
+
+user.create_card(card_type: 'VISA', number:"1234567891234567", expire: DateTime.new(2030))
+user.card.create_bank_info(name: "Vietinbank", abbreviation_name: "ACB")

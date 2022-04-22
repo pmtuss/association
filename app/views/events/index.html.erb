@@ -1,0 +1,15 @@
+<h3>Events</h3>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Participated </th>
+  </tr>
+  <% @events.each do |event|%>
+    <tr>
+      <td><%= link_to event.name, event %></td>
+      <td><%= event.users.size%> </td>
+    </tr>
+  <% end %>
+</table>
+

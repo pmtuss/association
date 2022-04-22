@@ -11,16 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2022_04_19_145700) do
-  create_table "addresses", force: :cascade do |t|
-    t.string "state"
-    t.integer "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_addresses_on_user_id"
-  end
-
   create_table "bank_infos", force: :cascade do |t|
     t.string "name"
+    t.string "abbreviation_name"
     t.integer "card_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -28,6 +21,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_145700) do
   end
 
   create_table "cards", force: :cascade do |t|
+    t.string "card_type"
+    t.string "number"
+    t.datetime "expire"
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -38,9 +34,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_145700) do
     t.text "body"
     t.string "commentable_type"
     t.integer "commentable_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "enrollments", force: :cascade do |t|
@@ -67,18 +65,32 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_145700) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "profiles", force: :cascade do |t|
+    t.string "name"
+    t.string "nickname"
+    t.string "telephone"
+    t.string "address"
+    t.datetime "dob"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
+    t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "addresses", "users"
   add_foreign_key "bank_infos", "cards"
   add_foreign_key "cards", "users"
+  add_foreign_key "comments", "users"
   add_foreign_key "enrollments", "events"
   add_foreign_key "enrollments", "users"
   add_foreign_key "posts", "users"
+  add_foreign_key "profiles", "users"
 end

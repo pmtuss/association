@@ -1,0 +1,51 @@
+<table>
+  <tr>
+    <th>Users</th>
+    <th>Events</th>
+    <th>Posts</th>
+    <th>Users haven't post</th>
+    <th>Users haven't comment</th>
+  </tr>
+
+  <tr>
+    <td><%= User.count %></td>
+    <td><%= Event.count %></td>
+    <td><%= Post.count %></td>
+    <td><%= User.where.not(id: Post.all.pluck(:user_id)).size %></td>
+    <td><%= User.where.not(id: Comment.all.pluck(:user_id)).size %></td>
+  </tr>
+</table>
+
+
+
+<h3>List users</h3>
+
+<%= form_with url: admin_users_path, method: :get do |form| %>
+  <%= form.text_field :name, placeholder: 'name'%>
+  <%= form.submit 'Search' %>
+<% end %>
+
+
+<table>
+  <tr>
+    <th><%= sortable "name" %></th>
+    <th>Email</th>
+    <th>Posts</th>
+    <th>Events</th>
+    <th>Comments</th>
+    <th>Bank</th>
+    <th><%= sortable "created_at", "Created" %></th>
+  </tr>
+
+  <% @users.each do |user| %>
+    <tr>
+      <td> <%= link_to user.name %> </td>
+      <td> <%= user.email%> </td>
+      <td> <%= user.posts.size%> </td>
+      <td> <%= user.events.size%> </td>
+      <td> <%= user.comments.size%> </td>
+      <td> <%= user.bank_info.abbreviation_name if user.bank_info%> </td>
+      <td> <%= user.created_at%> </td>
+    </tr>
+  <% end %>
+</table>
