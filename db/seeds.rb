@@ -9,13 +9,13 @@ User.destroy_all
 Post.destroy_all
 
 User.create([
-    {name: "admin", email: "admin@aaaa.com", admin: true},
-    {name: "user01", email: "user01@aaaa.com"},
-    {name: "user02", email: "user02@aaaa.com"},
-    {name: "user03", email: "user03@aaaa.com"},
-    {name: "user04", email: "user04@aaaa.com"}
+    {password: "123456789", email: "admin@aaaa.com", admin: true},
+    {password: "123456789", email: "user01@aaaa.com"},
+    {password: "123456789", email: "user02@aaaa.com"},
+    {password: "123456789", email: "user03@aaaa.com"},
+    {password: "123456789", email: "user04@aaaa.com"}
 ])
-user = User.find_by(name: "tai")
+user = User.find_by(email: "user01@aaaa.com")
 posts = user.posts.create([
     {title: "post 01", body: "this is post 01"},
     {title: "post 02", body: "this is post 02"}

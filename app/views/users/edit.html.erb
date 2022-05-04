@@ -1,3 +1,24 @@
 <h1>Edit user</h1>
 
-<%= render "form", user: @user %>
+<%= form_with model: @user do |form| %>
+  <div>
+    <div>Email: <%=form.text_field :email%></div>
+  </div>
+  <div>
+    <div>Password: <%=form.text_field :password%></div>
+  </div>
+
+  <%= form.fields_for :profile do |profile_form| %>
+    <ul>
+      <li>Name: <%= profile_form.text_field :name %></li>
+      <li>Nick Name: <%= profile_form.text_field :nickname %></li>
+      <li>Telephone: <%= profile_form.text_field :telephone %></li>
+      <li>Address: <%= profile_form.text_field :address %></li>
+      <li>Date of birth: <%= profile_form.date_field :dob %></li>
+    </ul>
+  <% end %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

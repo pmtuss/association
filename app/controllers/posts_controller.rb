@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_post, only: %i[show edit update destroy]
+  before_action :authenticate_user, except: %i[index show]
   def index
     @posts = Post.all
   end
@@ -13,7 +13,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post.author = User.find(params[:author_id])
+    @post.author = current_user
     @post = Post.new(post_params)
     if @post.save
       redirect_to @post
@@ -38,12 +38,13 @@ class PostsController < ApplicationController
     redirect_to root_path, status: :see_other
   end
 
-  private 
-    def post_params
-      params.require(:post).permit(:title, :body)
-    end
+  private
 
-    def set_post
-      @post = Post.find(params[:id])
-    end
+  def post_params
+    params.require(:post).permit(:title, :body)
+  end
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
 end

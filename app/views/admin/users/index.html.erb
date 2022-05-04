@@ -18,18 +18,19 @@
 
 
 
-<h3>List users</h3>
+<div style="margin: 20px 0;">
+  <b>List users</b>, <%= link_to t(".link_export"), export_csv_admin_users_path(format: :csv) %>
+</div>
 
 <%= form_with url: admin_users_path, method: :get do |form| %>
-  <%= form.text_field :name, placeholder: 'name'%>
+  <%= form.text_field :email, placeholder: 'email'%>
   <%= form.submit 'Search' %>
 <% end %>
 
 
 <table>
   <tr>
-    <th><%= sortable "name" %></th>
-    <th>Email</th>
+    <th><%= sortable "email" %></th>
     <th>Posts</th>
     <th>Events</th>
     <th>Comments</th>
@@ -39,8 +40,7 @@
 
   <% @users.each do |user| %>
     <tr>
-      <td> <%= link_to user.name %> </td>
-      <td> <%= user.email%> </td>
+      <td> <%= link_to user.email %> </td>
       <td> <%= user.posts.size%> </td>
       <td> <%= user.events.size%> </td>
       <td> <%= user.comments.size%> </td>

@@ -1,10 +1,10 @@
 <%= form_with model: user do |form| %>
   <div>
-    <div>Name: <%=form.text_field :name, value: user.name%></div>
+    <div>Email: <%=form.text_field :email, value: user.email%></div>
   </div>
 
   <div>
-    <div>Email: <%=form.text_field :email, value: user.email%></div>
+    <div>Password: <%=form.text_field :password, value: user.password%></div>
   </div>
 
   <div>

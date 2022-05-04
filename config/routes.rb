@@ -1,22 +1,23 @@
 Rails.application.routes.draw do
   root 'posts#index'
+  get 'login', to: "sessions#new"
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
   
   namespace :admin do
-    resources :users
+    resources :users, only: [:index, :show] do
+      get 'export_csv', on: :collection
+    end
   end
 
   resources :users do
     resources :posts 
-    resources :profiles
-    resources :cards
-    resources :bank_infos
+    resource :profile
+    resource :card
+    resource :bank_info
   end
 
-  resources :posts do 
-    resources :comments
-  end
-
-  resources :events do
+  resources :posts, :events do 
     resources :comments
   end
 
