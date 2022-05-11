@@ -1,6 +1,5 @@
-
+<div class="page-break">
   <p>Email: <%= @user.email %></p>
-  <%= link_to "PDF", user_path(@user, format: :pdf), class: "btn btn-primary" %>
   
   <h3>Profile</h3>
   <%= render 'shared/profile', profile: @user.profile if @user.profile%>
@@ -47,4 +46,5 @@
                       turbo_confirm: "Are you sure?"
                     } %>
   
+  </div>
   

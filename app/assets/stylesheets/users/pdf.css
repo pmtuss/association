@@ -1,0 +1,62 @@
+.d-flex {
+  display: -webkit-box;
+}
+
+.justify-content-between {
+  -webkit-box-pack: justify;
+}
+
+.flex-column {
+  -webkit-box-orient: vertical;
+}
+
+.flex-row {
+  -webkit-box-orient: horizontal;
+}
+
+.align-items-center {
+  -webkit-box-align: center;
+}
+
+#driver {
+  padding-bottom: 150px !important;
+}
+
+.title {
+  width: 200px;
+  word-wrap: break-word;
+  font-size: 1.5rem;
+  font-style: italic;
+}
+
+#contact {
+  width: 300px;
+  text-align: right;
+}
+
+#avatar {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
+
+#avatar > img {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
+
+.username {
+  font-size: 4.5rem;
+  position: relative;
+  bottom: -100px;
+}
+
+.right-column {
+  width: 70%;
+}
+
+ul > li {
+  font-size: 20px;
+  margin: 5px 0;
+}

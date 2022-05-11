@@ -74,3 +74,10 @@ group :test do
 end
 
 gem 'webpacker'
+
+gem 'wicked_pdf'
+
+gem 'wkhtmltopdf-binary'
+
+gem 'jsbundling-rails'
+gem 'cssbundling-rails'

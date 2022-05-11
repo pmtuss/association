@@ -6,6 +6,15 @@ class UsersController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "file_name",
+          template: "users/pdf",
+          formats: [:html],
+          layout: "pdf"
+      end
+    end
   end
 
   def new
